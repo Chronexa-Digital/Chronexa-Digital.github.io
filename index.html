@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chronexa Digital - Shaping the Future [Dark Mode Animated]</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="icon" href="assets/logo.jpg" type="image/jpeg">
+    <style>
+        :root {
+            --dark-bg: #111827;
+            --dark-card: #1f2937;
+            --dark-border: #374151;
+            --text-light: #f3f4f6;
+            --text-medium: #9ca3af;
+            --accent-blue: #60a5fa;
+            --accent-blue-darker: #3b82f6;
+            --accent-glow: rgba(96, 165, 250, 0.3);
+
+            --binary-color: rgba(96, 165, 250, 0.7);
+            --binary-bg: rgba(17, 24, 39, 0.1);
+        }
+        body {
+            font-family: 'Poppins', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .text-accent-blue { color: var(--accent-blue); }
+        .bg-accent-blue { background-color: var(--accent-blue); }
+        .border-accent-blue { border-color: var(--accent-blue); }
+        .hover\:bg-accent-blue-darker:hover { background-color: var(--accent-blue-darker); }
+        .text-medium { color: var(--text-medium); }
+
+        .shadow-material-dark { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 1px 4px rgba(0, 0, 0, 0.15); }
+        .hover\:shadow-material-dark-lg:hover { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), 0 6px 15px rgba(0, 0, 0, 0.2); }
+        .card-hover-effect { transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.35s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .card-hover-effect:hover { transform: translateY(-6px) scale(1.01); }
+
+        #binary-canvas {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.25;
+        }
+
+        header.scrolled { background-color: rgba(31, 41, 55, 0.95); padding-top: 0.75rem; padding-bottom: 0.75rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+        header.scrolled img { height: 2rem; }
+        header { transition: background-color 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease; }
+        header img { transition: height 0.3s ease; }
+
+        @keyframes rotateClockHand {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-chronos .clock-hand {
+            transform-origin: center;
+            animation: rotateClockHand 60s linear infinite;
+        }
+
+        @keyframes stackPlatter1 { /* Bottom */
+             0%, 100% { opacity: 0.3; transform: translateY(3px); }
+             50% { opacity: 1; transform: translateY(0px); }
+        }
+        @keyframes stackPlatter2 { /* Middle */
+             0%, 15%, 100% { opacity: 0.3; transform: translateY(3px); }
+             65% { opacity: 1; transform: translateY(0px); }
+        }
+        @keyframes stackPlatter3 { /* Top */
+              0%, 30%, 100% { opacity: 0.3; transform: translateY(3px); }
+              80% { opacity: 1; transform: translateY(0px); }
+        }
+        .animate-exa .platter-1 { animation: stackPlatter1 3.5s ease-in-out infinite; }
+        .animate-exa .platter-2 { animation: stackPlatter2 3.5s ease-in-out infinite; }
+        .animate-exa .platter-3 { animation: stackPlatter3 3.5s ease-in-out infinite; }
+
+
+        @keyframes digitalFlicker {
+            0%, 100% { opacity: 1; } 20% { opacity: 1; } 25% { opacity: 0.6; } 30% { opacity: 1; } 50% { opacity: 1; } 55% { opacity: 0.8; } 60% { opacity: 1; } 80% { opacity: 1; } 85% { opacity: 0.7; } 90% { opacity: 1; }
+        }
+          @keyframes cursorBlink {
+             0%, 100% { opacity: 1; } 50% { opacity: 0; }
+         }
+         .animate-digital .cursor {
+              animation: cursorBlink 1s step-end infinite;
+          }
+
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <header id="main-header" class="text-light fixed top-0 left-0 right-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center transition-all duration-300">
+            <a href="#home" class="flex items-center space-x-3 z-10">
+                <img src="assets/logo.jpg" alt="Chronexa Digital Logo" class="h-9 w-auto">
+                <span class="text-xl font-semibold text-light">Chronexa Digital</span>
+            </a>
+            <div class="space-x-6 hidden md:flex items-center z-10">
+                <a href="#home" class="text-sm font-medium text-medium hover:text-accent-blue transition duration-300">Home</a>
+                <a href="#meaning" class="text-sm font-medium text-medium hover:text-accent-blue transition duration-300">Our Name</a>
+                <a href="#team" class="text-sm font-medium text-medium hover:text-accent-blue transition duration-300">Team</a>
+            </div>
+             <div class="md:hidden z-10">
+                </div>
+        </nav>
+    </header>
+
+    <section id="home" class="relative min-h-screen flex items-center justify-center text-center overflow-hidden pt-20 pb-16 px-6">
+        <canvas id="binary-canvas"></canvas>
+        <div class="absolute inset-0 bg-gradient-to-b from-dark-bg/80 via-dark-bg/90 to-dark-bg z-[1]"></div>
+        <div class="relative z-[2] max-w-3xl">
+             <img src="assets/logo.jpg" alt="Chronexa Digital Logo Large" class="h-36 md:h-44 w-auto mx-auto mb-8 drop-shadow-lg" data-aos="zoom-in" data-aos-delay="200" data-aos-duration="1000">
+            <h1 class="text-4xl md:text-6xl font-bold text-light mb-5 leading-tight" data-aos="fade-up" data-aos-delay="400">
+                Chronexa Digital
+            </h1>
+            <p class="text-lg md:text-2xl text-accent-blue font-light tracking-wide" data-aos="fade-up" data-aos-delay="600">
+                Shaping the Future, One Platform at a Time.
+            </p>
+        </div>
+        <a href="#meaning" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10 animate-bounce text-accent-blue" aria-label="Scroll down">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 5.25l-7.5 7.5-7.5-7.5m15 6l-7.5 7.5-7.5-7.5" />
+            </svg>
+        </a>
+    </section>
+
+    <section id="meaning" class="py-20 md:py-28 bg-dark-bg px-6">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-light mb-16" data-aos="fade-up">Meaning Behind the Name</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+
+                <div class="bg-dark-card p-8 rounded-2xl shadow-material-dark border-t-4 border-accent-blue flex flex-col items-center text-center card-hover-effect" data-aos="fade-up" data-aos-delay="150">
+                    <div class="mb-6 p-4 bg-accent-blue/20 border border-accent-blue/30 rounded-full inline-flex animate-chronos">
+                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="var(--accent-blue)" class="w-9 h-9">
+                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                         <line x1="12" y1="12" x2="12" y2="7" stroke="var(--accent-blue)" stroke-width="1.5" class="clock-hand" stroke-linecap="round"/>
+                       </svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-light mb-4">Chronos</h3>
+                    <p class="text-text-medium text-sm leading-relaxed">
+                        Personifikasi waktu Yunani; melambangkan perjalanan waktu yang tak terhentikan, kekuatan, dan fondasi perubahan serta pergerakan.
+                    </p>
+                </div>
+
+                <div class="bg-dark-card p-8 rounded-2xl shadow-material-dark border-t-4 border-accent-blue flex flex-col items-center text-center card-hover-effect" data-aos="fade-up" data-aos-delay="300">
+                     <div class="mb-6 p-4 bg-accent-blue/20 border border-accent-blue/30 rounded-full inline-flex animate-exa">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="var(--accent-blue)" class="w-9 h-9">
+                           {/* Simplified Database representation with distinct platters */}
+                           <ellipse cx="12" cy="6.375" rx="8.25" ry="2.5" class="platter-3" />
+                           <path d="M3.75 6.375v11.25c0 1.387 3.694 2.5 8.25 2.5s8.25-1.113 8.25-2.5V6.375" class="platter-1" />
+                           <path d="M3.75 11.8125c0 1.387 3.694 2.5 8.25 2.5s8.25-1.113 8.25-2.5" class="platter-2" />
+                           {/* Add original lines for context if desired */}
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.375v3.75m16.5-3.75v3.75" opacity="0.5"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-light mb-4">Exa</h3>
+                    <p class="text-text-medium text-sm leading-relaxed">
+                        Awalan metrik (10¹⁸), seringkali di dunia digital (Exabyte). Memberikan nuansa skala besar, kekuatan teknologi, dan kapabilitas data masif.
+                    </p>
+                </div>
+
+                 <div class="bg-dark-card p-8 rounded-2xl shadow-material-dark border-t-4 border-accent-blue flex flex-col items-center text-center card-hover-effect" data-aos="fade-up" data-aos-delay="450">
+                     <div class="mb-6 p-4 bg-accent-blue/20 border border-accent-blue/30 rounded-full inline-flex animate-digital">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="var(--accent-blue)" class="w-9 h-9 flicker-target">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M21 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25h13.5A2.25 2.25 0 0021 18z" />
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 15h0.01" class="cursor" stroke-width="2.5"/>
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-light mb-4">Digital</h3>
+                    <p class="text-text-medium text-sm leading-relaxed">
+                        Mengikat konsep ke dunia teknologi informasi, platform bisnis, website, dan semua bentuk inovasi berbasis digital modern.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="team" class="py-20 md:py-28 bg-dark-bg px-6 overflow-hidden">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-light mb-4" data-aos="fade-up">Meet the Chronexa Team</h2>
+            <p class="text-center text-text-medium mb-16 text-lg" data-aos="fade-up" data-aos-delay="100">Students of Universitas Ahmad Dahlan</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 justify-items-center">
+
+                <div class="bg-dark-card p-6 rounded-2xl shadow-material-dark w-full max-w-xs flex flex-col items-center text-center card-hover-effect border border-dark-border hover:border-accent-blue/50" data-aos="zoom-in-up" data-aos-duration="500">
+                    <div class="w-32 h-32 rounded-full bg-gradient-to-br from-gray-600 to-gray-700 mb-5 flex items-center justify-center overflow-hidden shadow-lg border-2 border-dark-border">
+                         <img src="assets/andi.jpg" alt="Andi Bintang T. D." class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
+                         <div class="w-full h-full items-center justify-center hidden bg-gray-700">
+                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="var(--text-medium)" class="w-16 h-16 opacity-50">
+                               <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                             </svg>
+                         </div>
+                    </div>
+                    <h3 class="text-lg font-semibold text-light mb-0.5">Andi Bintang T. D.</h3>
+                    <p class="text-xs text-text-medium mb-2">2200018183</p>
+                    <p class="text-accent-blue font-medium text-sm mb-3">Project Manager</p>
+                    <p class="text-text-medium text-xs leading-relaxed flex-grow">Mengatur visi, misi, strategi, dan koordinasi seluruh aktivitas tim.</p>
+                </div>
+
+                 <div class="bg-dark-card p-6 rounded-2xl shadow-material-dark w-full max-w-xs flex flex-col items-center text-center card-hover-effect border border-dark-border hover:border-accent-blue/50" data-aos="zoom-in-up" data-aos-delay="100" data-aos-duration="500">
+                   <div class="w-32 h-32 rounded-full bg-gradient-to-br from-gray-600 to-gray-700 mb-5 flex items-center justify-center overflow-hidden shadow-lg border-2 border-dark-border">
+                       <img src="assets/chiqitita.jpg" alt="Chiqitita Siregar" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
+                         <div class="w-full h-full items-center justify-center hidden bg-gray-700">
+                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="var(--text-medium)" class="w-16 h-16 opacity-50">
+                               <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                           </svg>
+                       </div>
+                   </div>
+                   <h3 class="text-lg font-semibold text-light mb-0.5">Chiqitita Siregar</h3>
+                   <p class="text-xs text-text-medium mb-2">2200018163</p>
+                   <p class="text-accent-blue font-medium text-sm mb-3">Business Analyst</p>
+                   <p class="text-text-medium text-xs leading-relaxed flex-grow">Analisis kebutuhan bisnis & teknis, merancang solusi pengembangan.</p>
+                </div>
+
+                 <div class="bg-dark-card p-6 rounded-2xl shadow-material-dark w-full max-w-xs flex flex-col items-center text-center card-hover-effect border border-dark-border hover:border-accent-blue/50" data-aos="zoom-in-up" data-aos-delay="200" data-aos-duration="500">
+                   <div class="w-32 h-32 rounded-full bg-gradient-to-br from-gray-600 to-gray-700 mb-5 flex items-center justify-center overflow-hidden shadow-lg border-2 border-dark-border">
+                        <img src="assets/mutiara.jpg" alt="Mutiara Zahira A." class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
+                         <div class="w-full h-full items-center justify-center hidden bg-gray-700">
+                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="var(--text-medium)" class="w-16 h-16 opacity-50">
+                               <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                           </svg>
+                       </div>
+                   </div>
+                   <h3 class="text-lg font-semibold text-light mb-0.5">Mutiara Zahira A.</h3>
+                   <p class="text-xs text-text-medium mb-2">2200018175</p>
+                   <p class="text-accent-blue font-medium text-sm mb-3">UI/UX Designer</p>
+                   <p class="text-text-medium text-xs leading-relaxed flex-grow">Desain antarmuka dan tingkatkan pengalaman pengguna platform.</p>
+                </div>
+
+                 <div class="bg-dark-card p-6 rounded-2xl shadow-material-dark w-full max-w-xs flex flex-col items-center text-center card-hover-effect border border-dark-border hover:border-accent-blue/50" data-aos="zoom-in-up" data-aos-delay="300" data-aos-duration="500">
+                   <div class="w-32 h-32 rounded-full bg-gradient-to-br from-gray-600 to-gray-700 mb-5 flex items-center justify-center overflow-hidden shadow-lg border-2 border-dark-border">
+                        <img src="assets/ahmad.jpg" alt="Ahmad Raihan F. W." class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
+                         <div class="w-full h-full items-center justify-center hidden bg-gray-700">
+                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="var(--text-medium)" class="w-16 h-16 opacity-50">
+                               <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                           </svg>
+                       </div>
+                   </div>
+                   <h3 class="text-lg font-semibold text-light mb-0.5">Ahmad Raihan F. W.</h3>
+                   <p class="text-xs text-text-medium mb-2">2200018176</p>
+                   <p class="text-accent-blue font-medium text-sm mb-3">Front-End Developer</p>
+                   <p class="text-text-medium text-xs leading-relaxed flex-grow">Membuat tampilan visual aplikasi berbasis desain UI/UX.</p>
+                </div>
+
+                 <div class="bg-dark-card p-6 rounded-2xl shadow-material-dark w-full max-w-xs flex flex-col items-center text-center card-hover-effect border border-dark-border hover:border-accent-blue/50" data-aos="zoom-in-up" data-aos-delay="400" data-aos-duration="500">
+                   <div class="w-32 h-32 rounded-full bg-gradient-to-br from-gray-600 to-gray-700 mb-5 flex items-center justify-center overflow-hidden shadow-lg border-2 border-dark-border">
+                       <img src="assets/mohammad.jpg" alt="Mohammad Farid H." class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
+                         <div class="w-full h-full items-center justify-center hidden bg-gray-700">
+                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="var(--text-medium)" class="w-16 h-16 opacity-50">
+                               <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                           </svg>
+                       </div>
+                   </div>
+                   <h3 class="text-lg font-semibold text-light mb-0.5">Mohammad Farid H.</h3>
+                   <p class="text-xs text-text-medium mb-2">2200018401</p>
+                   <p class="text-accent-blue font-medium text-sm mb-3">Back-End Developer</p>
+                   <p class="text-text-medium text-xs leading-relaxed flex-grow">Mengembangkan server, database, API, serta logika backend.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark-card text-text-medium py-8 mt-16 border-t border-dark-border">
+        <div class="container mx-auto text-center text-sm px-6">
+            © 2023 Chronexa Digital. Built with passion at Universitas Ahmad Dahlan.
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: false, // Animate every time element scrolls into view
+            duration: 800,
+            offset: 80,
+            easing: 'ease-out-cubic',
+            disable: 'mobile'
+        });
+
+        // Binary Canvas Animation (Unchanged V4 logic)
+        const canvas = document.getElementById('binary-canvas'); const ctx = canvas.getContext('2d'); let cw = window.innerWidth; let ch = document.getElementById('home').offsetHeight; canvas.width = cw; canvas.height = ch; let charArr = ['0', '1']; let maxCharCount = 150; let fallingCharArr = []; let fontSize = 14; let maxColums = cw / fontSize; let frames = 0;
+        class FallingChar { constructor(x, y) { this.x = x; this.y = y; } draw(ctx) { this.value = charArr[Math.floor(Math.random() * charArr.length)]; this.speed = (Math.random() * fontSize * 3) / 4 + (fontSize * 3) / 4; ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--binary-color').trim(); ctx.font = fontSize + 'px monospace'; ctx.fillText(this.value, this.x, this.y); this.y += this.speed; if (this.y > ch) { this.y = (Math.random() * ch) / 2 - 50; this.x = Math.floor(Math.random() * maxColums) * fontSize; this.speed = (-Math.random() * fontSize * 3) / 4 + (fontSize * 3) / 4; } } }
+        function initFallingChars() { fallingCharArr = []; for (let i = 0; i < maxCharCount; i++) { fallingCharArr.push(new FallingChar(Math.floor(Math.random() * maxColums) * fontSize, (Math.random() * ch) / 2 - 50)); } } initFallingChars();
+        const update = () => { ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--binary-bg').trim(); ctx.fillRect(0, 0, cw, ch); let len = fallingCharArr.length; for (let i = 0; i < len && frames % 2 == 0; i++) { fallingCharArr[i].draw(ctx); } requestAnimationFrame(update); frames++; };
+        let resizeTimer; window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { cw = window.innerWidth; ch = document.getElementById('home').offsetHeight; canvas.width = cw; canvas.height = ch; maxColums = cw / fontSize; initFallingChars(); }, 250); }); update();
+
+        // Header scroll effect (Unchanged V4 logic)
+        const header = document.getElementById('main-header'); const scrollThreshold = 50;
+        window.addEventListener('scroll', () => { if (window.scrollY > scrollThreshold) { header.classList.add('scrolled'); } else { header.classList.remove('scrolled'); } });
+    </script>
+</body>
+</html>
